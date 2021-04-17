@@ -48,7 +48,7 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /var/log/supervisor
 COPY ./php/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./php/crontabs/root /var/spool/cron/crontabs/root
+COPY ./php/crontabs/ /var/spool/cron/crontabs/
 RUN ln -sfT /dev/stdout /var/log/cron
 CMD ["/usr/bin/supervisord"]
 
