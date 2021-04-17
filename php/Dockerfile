@@ -30,6 +30,12 @@ RUN apt-get update && apt-get install -y \
 #RUN localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias ja_JP.UTF-8
 COPY ./php/php/my.ini /usr/local/etc/php/conf.d/
 # Apache2
+ENV APACHE_RUN_USER=app
+ENV APACHE_RUN_GROUP=app
+RUN	chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/www/html \
+  && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/run/apache2 \
+  && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/lock/apache2 \
+  && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/log/apache2
 RUN a2enmod rewrite
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
