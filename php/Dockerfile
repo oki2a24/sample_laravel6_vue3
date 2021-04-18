@@ -6,17 +6,17 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
   && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-  && apt-get update && apt-get install -y sudo \
+  && apt-get update && apt-get install -y --no-install-recommends sudo \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
   && chmod 0440 /etc/sudoers.d/$USERNAME
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-  && apt-get install -y nodejs \
+  && apt-get install -y --no-install-recommends nodejs \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   libpq-dev \
   libzip-dev \
   unzip \
@@ -42,7 +42,7 @@ COPY ./php/apache2/001-my.conf /etc/apache2/sites-available/001-my.conf
 RUN a2dissite 000-default \
   && a2ensite 001-my
 # Supervisor
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   busybox-static \
   supervisor \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
