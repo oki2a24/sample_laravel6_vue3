@@ -17,11 +17,16 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  libjpeg-dev \
+  libpng-dev \
   libpq-dev \
   libzip-dev \
   unzip \
+  && docker-php-ext-configure gd \
+  --with-jpeg \
   && docker-php-ext-install \
   bcmath \
+  gd \
   pdo_mysql \
   pdo_pgsql \
   zip \
