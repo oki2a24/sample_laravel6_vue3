@@ -193,6 +193,6 @@ class FileControllerTest extends TestCase
         ]);
 
         // 確認。ファイル保存
-        Storage::assertMissing('files/' . $targetFile->path);
+        Storage::assertMissing($targetFile->path);
     }
 }

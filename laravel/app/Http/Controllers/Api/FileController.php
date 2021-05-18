@@ -86,7 +86,12 @@ class FileController extends Controller
      */
     public function destroy(File $file): JsonResponse
     {
+        $filePathToBeDeleted = $file->path;
+
         $file->delete();
+
+        // レコードに紐づいていたファイルを削除
+        Storage::delete($filePathToBeDeleted);
 
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
