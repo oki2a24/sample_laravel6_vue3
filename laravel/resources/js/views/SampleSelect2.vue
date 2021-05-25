@@ -16,10 +16,10 @@ export default {
   name: "SampleSelect2",
   components: { BaseSelect2 },
   setup() {
-    const selected = ref(2);
+    const selected = ref("2");
     const options = [
-      { id: 1, text: "Hello" },
-      { id: 2, text: "World" },
+      { id: "1", text: "Hello" },
+      { id: "2", text: "World" },
     ];
 
     return {
