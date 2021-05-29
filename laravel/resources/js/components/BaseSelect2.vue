@@ -12,6 +12,10 @@ import { ref, onMounted, onUnmounted, watch } from "vue";
 export default {
   name: "BaseSelect2",
   props: {
+    match: {
+      type: Function,
+      default: null,
+    },
     options: {
       type: Array,
       default: () => {
@@ -43,9 +47,14 @@ export default {
     );
 
     onMounted(() => {
+      const config = { data: props.options };
+      if (props.match) {
+        config.matcher = props.match;
+      }
+      console.log("config", config);
       $(root.value)
         // init select2
-        .select2({ data: props.options })
+        .select2(config)
         .val(props.modelValue)
         .trigger("change")
         // emit event on change.
