@@ -47,7 +47,10 @@ export default {
     );
 
     onMounted(() => {
-      const config = { data: props.options };
+      const config = {
+        data: props.options,
+        theme: "bootstrap",
+      };
       if (props.match) {
         config.matcher = props.match;
       }
