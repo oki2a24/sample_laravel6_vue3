@@ -13,3 +13,31 @@
 // Select2
 @import "~select2/dist/css/select2.min.css";
 @import "~select2-theme-bootstrap4/dist/select2-bootstrap.min.css";
+
+// flatpickr
+@import "~flatpickr/dist/flatpickr.css";
+/* 日曜日：赤 */
+.flatpickr-calendar
+  .flatpickr-innerContainer
+  .flatpickr-weekdays
+  .flatpickr-weekday:nth-child(7n),
+.flatpickr-calendar
+  .flatpickr-innerContainer
+  .flatpickr-days
+  .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n) {
+  color: red;
+}
+
+/* 土曜日：青 */
+.flatpickr-calendar
+  .flatpickr-innerContainer
+  .flatpickr-weekdays
+  .flatpickr-weekday:nth-child(6),
+.flatpickr-calendar
+  .flatpickr-innerContainer
+  .flatpickr-days
+  .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n
+    -
+    1) {
+  color: blue;
+}

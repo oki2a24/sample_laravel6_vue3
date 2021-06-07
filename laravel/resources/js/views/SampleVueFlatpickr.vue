@@ -1,21 +1,23 @@
 <template>
   <div class="container">
-  <h1>SampleVueFlatpickr</h1>
-  <flat-pickr v-model="date"></flat-pickr>
+    <h1>SampleVueFlatpickr</h1>
+    <basee-vue-flatpickr v-model="date1" />
+    <basee-vue-flatpickr v-model="date2" />
   </div>
 </template>
 
 <script>
+import BaseeVueFlatpickr from "../components/BaseVueFlatpickr.vue";
 import { ref } from "vue";
-import flatPickr from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css";
 
 export default {
   name: "SampleVueFlatpickr",
-  components: { flatPickr },
+  components: { BaseeVueFlatpickr },
   setup() {
-    const date = ref("");
-    return { date };
+    return {
+      date1: ref(""),
+      date2: ref(""),
+    };
   },
 };
 </script>
