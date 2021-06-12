@@ -6,7 +6,12 @@
       <li
         v-for="(file, i) in files"
         :key="i"
-        class="list-group-item d-flex justify-content-between align-items-center"
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+        "
       >
         <img class="thumbnail" :src="file.url" />
         <div>
