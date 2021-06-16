@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import ExampleComponent from "../components/ExampleComponent.vue";
 import SampleDropzone from "../views/SampleDropzone.vue";
 import SampleFlatpickr from "../views/SampleFlatpickr.vue";
+import SampleModal from "../views/SampleModal.vue";
 import SampleVueFlatpickr from "../views/SampleVueFlatpickr.vue";
 import SampleSelect2 from "../views/SampleSelect2.vue";
 import Vue3Dropzone from "../views/Vue3Dropzone.vue";
@@ -33,6 +34,11 @@ const routes = [
     path: "/sample_flatpickr",
     name: "SampleFlatpickr",
     component: SampleFlatpickr,
+  },
+  {
+    path: "/sample_modal",
+    name: "SampleModal",
+    component: SampleModal,
   },
   {
     path: "/sample_select2",
