@@ -2,7 +2,12 @@
   <div class="container">
     <h1>Select2 ラッパー SFC の利用</h1>
     <p>Selected: {{ selected }}</p>
-    <base-select-2 v-model="selected" :match="matchCustom" :options="options">
+    <base-select-2
+      v-model="selected"
+      :config="config"
+      :options="options"
+      :class-value="'is-invalid'"
+    >
       <option disabled value="0">Select one</option>
     </base-select-2>
   </div>
@@ -79,8 +84,10 @@ export default {
       { id: "5", text: "秋田県", hiragana: "あきたけん", alphabet: "akitaken" },
     ];
 
+    const config = { matcher: matchCustom };
+
     return {
-      matchCustom,
+      config,
       options,
       selected,
     };
