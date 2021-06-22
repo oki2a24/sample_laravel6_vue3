@@ -1,13 +1,18 @@
 <template>
-  <div id="myDropzoneId" class="dropzone"></div>
+  <div ref="root" class="dropzone" />
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import Dropzone from "dropzone";
 export default {
   name: "BaseDropzone",
   props: {
+    options: {
+      default: () => {},
+      required: false,
+      type: Object,
+    },
     url: {
       type: String,
       require: true,
@@ -16,17 +21,21 @@ export default {
   },
   emits: ["onSuccess"],
   setup(props, { emit }) {
-    const initDropzone = () => {
+    const root = ref(null);
+
+    onMounted(() => {
       Dropzone.autoDiscover = false;
       //new Dropzone("div#myId", { url: "https://httpbin.org/post" });
-      const myDropzone = new Dropzone("div#myDropzoneId", {
+      const myDropzone = new Dropzone(root.value, {
         url: props.url,
         addRemoveLinks: true,
         dictDefaultMessage:
           "画像ファイルをここにドロップするか、クリックしてアップロード",
         dictCancelUpload: "アップロードをキャンセル",
         dictRemoveFile: "操作エリアから除去",
+        ...props.options,
       });
+
       myDropzone.on("success", (file, response) => {
         emit("onSuccess", file, response);
         setTimeout(() => myDropzone.removeFile(file), 10000);
@@ -38,11 +47,9 @@ export default {
           "dz-error-message"
         )[0].textContent = "アップロードに失敗しました。";
       });
-    };
-
-    onMounted(() => {
-      initDropzone();
     });
+
+    return { root };
   },
 };
 </script>
