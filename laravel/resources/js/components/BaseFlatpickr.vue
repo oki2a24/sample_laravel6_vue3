@@ -24,6 +24,7 @@ export default {
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const root = ref(null);
+    let fp = null;
 
     const updateModelValue = (event) => {
       emit("update:modelValue", event.target.value);
@@ -35,11 +36,11 @@ export default {
         locale: Japanese,
         ...props.config,
       };
-      flatpickr(root.value, config);
+      fp = flatpickr(root.value, config);
     });
 
     onUnmounted(() => {
-      flatpickr.destroy();
+      fp.destroy();
     });
 
     return { root, updateModelValue };

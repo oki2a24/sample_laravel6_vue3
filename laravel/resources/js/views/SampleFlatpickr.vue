@@ -3,6 +3,8 @@
     <h1>SampleFlatpickr</h1>
     <base-flatpickr v-model="date1" />
     <base-flatpickr v-model="date2" />
+
+    <router-link :to="{ name: 'SampleDropzone' }">SampleDropzone</router-link>
   </div>
 </template>
 
