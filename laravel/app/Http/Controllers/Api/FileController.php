@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\FileStoreRequest;
 use App\Http\Resources\File as FileResource;
 use App\Models\File;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -26,10 +26,10 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  FileStoreRequest  $request
      * @return FileResource
      */
-    public function store(Request $request): FileResource
+    public function store(FileStoreRequest $request): FileResource
     {
         $file = $request->file('file');
         $path = $file->store('files');
@@ -56,11 +56,11 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  FileStoreRequest  $request
      * @param  File  $file
      * @return FileResource
      */
-    public function update(Request $request, File $file): FileResource
+    public function update(FileStoreRequest $request, File $file): FileResource
     {
         $filePathToBeDeleted = $file->path;
 
