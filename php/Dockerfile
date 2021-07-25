@@ -59,13 +59,13 @@ COPY ./php/crontabs/ /var/spool/cron/crontabs/
 RUN ln -sfT /dev/stdout /var/log/cron
 CMD ["/usr/bin/supervisord"]
 # sendmail
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  exim4-daemon-light \
-  mailutils \
-  msmtp \
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY ./php/php/sendmail.ini /usr/local/etc/php/conf.d/
-COPY ./php/exim4/update-exim4.conf.conf /etc/exim4/update-exim4.conf.conf
-RUN service exim4 reload
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#  exim4-daemon-light \
+#  mailutils \
+#  msmtp \
+#  && apt-get clean && rm -rf /var/lib/apt/lists/*
+#COPY ./php/php/sendmail.ini /usr/local/etc/php/conf.d/
+#COPY ./php/exim4/update-exim4.conf.conf /etc/exim4/update-exim4.conf.conf
+#RUN service exim4 reload
 
 FROM shared AS develop
