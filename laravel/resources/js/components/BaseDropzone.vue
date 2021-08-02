@@ -29,6 +29,7 @@ export default {
       const myDropzone = new Dropzone(root.value, {
         url: props.url,
         addRemoveLinks: true,
+        autoProcessQueue: false,
         dictDefaultMessage:
           "画像ファイルをここにドロップするか、クリックしてアップロード",
         dictCancelUpload: "アップロードをキャンセル",
@@ -36,6 +37,16 @@ export default {
         ...props.options,
       });
 
+      myDropzone.on("addedfile", (file) => {
+        const confirmed = window.confirm("アップロードしますよ?");
+        if (confirmed) {
+          // myDropzone.processQueue(); では動作しない。
+          // `addedfile` 完了後に `myDropzone.processQueue()` を実行するために setTimeout を使用
+          setTimeout(() => myDropzone.processQueue(), 0);
+        } else {
+          myDropzone.removeFile(file);
+        }
+      });
       myDropzone.on("success", (file, response) => {
         emit("onSuccess", file, response);
         setTimeout(() => myDropzone.removeFile(file), 10000);
