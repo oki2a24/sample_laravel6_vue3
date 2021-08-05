@@ -19,7 +19,7 @@ export default {
       default: "",
     },
   },
-  emits: ["onSuccess"],
+  emits: ["onAddedfile", "onSuccess"],
   setup(props, { emit }) {
     const root = ref(null);
 
@@ -38,14 +38,7 @@ export default {
       });
 
       myDropzone.on("addedfile", (file) => {
-        const confirmed = window.confirm("アップロードしますよ?");
-        if (confirmed) {
-          // myDropzone.processQueue(); では動作しない。
-          // `addedfile` 完了後に `myDropzone.processQueue()` を実行するために setTimeout を使用
-          setTimeout(() => myDropzone.processQueue(), 0);
-        } else {
-          myDropzone.removeFile(file);
-        }
+        emit("onAddedfile", file, myDropzone);
       });
       myDropzone.on("success", (file, response) => {
         emit("onSuccess", file, response);

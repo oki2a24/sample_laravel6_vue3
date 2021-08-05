@@ -24,7 +24,11 @@
       </li>
     </ul>
     <h2>アップロード操作エリア</h2>
-    <base-dropzone :url="'api/files'" @on-success="onSuccess" />
+    <base-dropzone
+      :url="'api/files'"
+      @on-addedfile="onAddedfile"
+      @on-success="onSuccess"
+    />
   </div>
 </template>
 
@@ -65,9 +69,21 @@ export default {
       files.value = reloaded;
     };
 
+    const onAddedfile = (file, myDropzone) => {
+      const confirmed = window.confirm("アップロードしますよ?");
+      if (confirmed) {
+        // myDropzone.processQueue(); では動作しない。
+        // `addedfile` 完了後に `myDropzone.processQueue()` を実行するために setTimeout を使用
+        setTimeout(() => myDropzone.processQueue(), 0);
+      } else {
+        myDropzone.removeFile(file);
+      }
+    };
+
     return {
       deleteFile,
       files,
+      onAddedfile,
       onSuccess,
     };
   },
